@@ -1,0 +1,80 @@
+matches:
+  # ── Claude Research ──────────────────────────────────────────────────
+  - trigger: ";res"
+    replace: "Please research online for the latest documentation and latest best practices (2026)"
+
+  # ── Suggestions List (HTML) ───────────────────────────────────────────
+  - trigger: ";lis"
+    replace: |
+      Provide a uniquely numbered and organized list of suggestions, gaps, improvements, fixes and anything else needed. For each point provide 2 or more options of actions (A, B...) including the option to skip. Make it an html file and host it locally so it will save my selection automatically. Add a comment box under each one so I can add context or more instruction to it
+
+  # ── Git workflow ──────────────────────────────────────────────────────
+  - trigger: ";git"
+    replace: "Please commit, push, merge and rebase if needed. Do it in the best way possible not to lose any work from you or other agents."
+
+  # ── Planning & Thinking ───────────────────────────────────────────────
+  - trigger: ";plan"
+    replace: "Before writing any code, create a detailed step-by-step implementation plan. Identify the files to change, the approach, and any risks or trade-offs."
+
+  - trigger: ";think"
+    replace: "Think through this carefully step by step before answering. Show your reasoning."
+
+  - trigger: ";why"
+    replace: "Explain why you chose this approach. What alternatives did you consider and why did you rule them out?"
+
+  # ── Debugging ─────────────────────────────────────────────────────────
+  - trigger: ";debug"
+    replace: "Use systematic debugging: reproduce the issue, form a hypothesis, verify it, then fix. Show your reasoning at each step."
+
+  - trigger: ";err"
+    replace: "Analyze this error carefully. What is the root cause? What is the minimal fix? Are there related issues I should know about?"
+
+  # ── Code Quality ──────────────────────────────────────────────────────
+  - trigger: ";rev"
+    replace: "Review this code for correctness, security vulnerabilities, performance issues, and maintainability. Be specific and actionable."
+
+  - trigger: ";tdd"
+    replace: "Use test-driven development: write the failing test first, then write the minimal code to make it pass, then refactor."
+
+  - trigger: ";refac"
+    replace: "Refactor this code for clarity and maintainability. Don't change behavior. Explain each change."
+
+  - trigger: ";test"
+    replace: "Write comprehensive tests covering: happy path, edge cases, error conditions, and boundary values."
+
+  - trigger: ";sec"
+    replace: "Do a security review of this code. Check for OWASP top 10, injection attacks, auth issues, data exposure, and any other vulnerabilities."
+
+  - trigger: ";perf"
+    replace: "Analyze for performance issues. Identify bottlenecks, unnecessary work, and memory usage. Suggest concrete optimizations with expected impact."
+
+  # ── Communication ─────────────────────────────────────────────────────
+  - trigger: ";short"
+    replace: "Answer in 2-3 sentences maximum. Be direct and skip all preamble."
+
+  - trigger: ";sum"
+    replace: "Summarize what we've done so far in this session, what's working, what's pending, and what the next step is."
+
+  - trigger: ";ctx"
+    replace: "Before responding, review the full context of our conversation to make sure your answer is consistent with everything we've discussed."
+
+  # ── Autonomy ──────────────────────────────────────────────────────────
+  - trigger: ";yolo"
+    replace: "Proceed without asking clarifying questions. Make the best decision you can with the information available. If you must choose, bias toward simplicity."
+
+  - trigger: ";auto"
+    replace: "Complete this task end-to-end autonomously. Make all necessary decisions, write all code, run all commands. Report when done."
+
+  # ── Documentation ─────────────────────────────────────────────────────
+  - trigger: ";doc"
+    replace: "Write clear, concise documentation for this. Include: what it does, how to use it, parameters/options, and a usage example."
+
+  # ── Workflow meta ─────────────────────────────────────────────────────
+  - trigger: ";fix"
+    replace: "Fix this. Identify the root cause, implement the minimal correct fix, and confirm nothing else broke."
+
+  - trigger: ";next"
+    replace: "What should I do next? Given everything in context, what is the highest-value next step?"
+
+  - trigger: ";cave"
+    replace: "Switch to caveman mode: drop all filler, articles, pleasantries. Technical substance only. Fragments OK."
