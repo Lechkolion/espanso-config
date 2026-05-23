@@ -1,4 +1,69 @@
 matches:
+  # ── Help / Cheat Sheet ────────────────────────────────────────────────
+  - trigger: ";help"
+    replace: |
+      ╔══════════════════════════════════════════╗
+      ║       ESPANSO SHORTCUTS REFERENCE        ║
+      ╚══════════════════════════════════════════╝
+
+      ── RESEARCH & CONTEXT ──────────────────────
+      ;res    Research latest docs & best practices (2026)
+      ;ctx    Review full conversation context first
+      ;sum    Session summary: done / pending / next
+      ;chain  Explicit chain-of-thought reasoning
+
+      ── PLANNING ────────────────────────────────
+      ;plan   Step-by-step implementation plan
+      ;think  Think carefully before answering
+      ;alt    3 completely different approaches
+      ;scope  What am I missing / not thinking about?
+      ;pm     Premortem: assume it failed — why?
+
+      ── DEBUGGING & FIXING ──────────────────────
+      ;debug  Systematic debug (repro→hypothesize→fix)
+      ;err    Root cause analysis for errors
+      ;fix    Minimal correct fix, verify nothing broke
+      ;rubber Rubber duck: ask questions, don't solve yet
+
+      ── CODE QUALITY ────────────────────────────
+      ;rev    Full code review (correctness/security/perf)
+      ;sec    OWASP security review
+      ;perf   Performance bottleneck analysis
+      ;test   Comprehensive test coverage
+      ;tdd    Test-driven development
+      ;refac  Refactor for clarity, don't change behavior
+
+      ── CRITICAL THINKING ───────────────────────
+      ;ask    Ask clarifying questions before answering
+      ;critic Harsh critique — real weaknesses, no diplomacy
+      ;steel  Steelman opposing view, then your take
+      ;why    Explain approach & ruled-out alternatives
+
+      ── COMMUNICATION ───────────────────────────
+      ;short  2-3 sentences max, no preamble
+      ;tldr   TL;DR first, then details
+      ;eli5   Explain like I'm 5
+      ;ghost  Rewrite in natural human tone
+      ;cave   Caveman mode: no filler, fragments OK
+      ;check  Convert to actionable checkbox list
+
+      ── DOCS & OUTPUT ───────────────────────────
+      ;doc    Write documentation with usage examples
+      ;lis    Numbered suggestions list as local HTML
+
+      ── AUTONOMY ────────────────────────────────
+      ;auto   Complete end-to-end autonomously
+      ;yolo   No clarifying questions, just proceed
+
+      ── WORKFLOW ────────────────────────────────
+      ;git    Commit, push, merge, rebase safely
+      ;next   What is the highest-value next step?
+
+      ── UTILITY ─────────────────────────────────
+      ;date   Insert today's date
+      ;dt     Insert date + time
+      ;uuid   Insert a new UUID
+
   # ── Claude Research ──────────────────────────────────────────────────
   - trigger: ";res"
     replace: "Please research online for the latest documentation and latest best practices (2026)"
@@ -22,12 +87,24 @@ matches:
   - trigger: ";why"
     replace: "Explain why you chose this approach. What alternatives did you consider and why did you rule them out?"
 
+  - trigger: ";alt"
+    replace: "Give me 3 completely different approaches to this problem. Don't evaluate them yet — just present each one clearly."
+
+  - trigger: ";scope"
+    replace: "What am I NOT thinking about here? What's out of scope, implicitly assumed, or missing from this picture entirely?"
+
+  - trigger: ";chain"
+    replace: "Think through this step by step. Show your chain of reasoning explicitly — every inference and assumption — before reaching a conclusion."
+
   # ── Debugging ─────────────────────────────────────────────────────────
   - trigger: ";debug"
     replace: "Use systematic debugging: reproduce the issue, form a hypothesis, verify it, then fix. Show your reasoning at each step."
 
   - trigger: ";err"
     replace: "Analyze this error carefully. What is the root cause? What is the minimal fix? Are there related issues I should know about?"
+
+  - trigger: ";rubber"
+    replace: "I'll explain my problem out loud. Don't solve it yet — just ask me questions until I've reasoned through it myself."
 
   # ── Code Quality ──────────────────────────────────────────────────────
   - trigger: ";rev"
@@ -48,15 +125,40 @@ matches:
   - trigger: ";perf"
     replace: "Analyze for performance issues. Identify bottlenecks, unnecessary work, and memory usage. Suggest concrete optimizations with expected impact."
 
+  # ── Critical Thinking ─────────────────────────────────────────────────
+  - trigger: ";ask"
+    replace: "Before answering, ask me 3-5 clarifying questions that would meaningfully change your response. Wait for my answers before proceeding."
+
+  - trigger: ";critic"
+    replace: "Critique this harshly. Don't be diplomatic — what are the actual weaknesses, blind spots, and risks? Assume I can handle the truth."
+
+  - trigger: ";steel"
+    replace: "Steelman the strongest possible version of the opposing argument to what I've said. Then tell me where you genuinely agree and disagree with it."
+
+  - trigger: ";pm"
+    replace: "Do a premortem on this. Assume it failed badly 6 months from now — what were the 3 most likely causes of failure?"
+
   # ── Communication ─────────────────────────────────────────────────────
   - trigger: ";short"
     replace: "Answer in 2-3 sentences maximum. Be direct and skip all preamble."
+
+  - trigger: ";tldr"
+    replace: "Give me the TL;DR in one sentence first, then expand with the important details."
+
+  - trigger: ";eli5"
+    replace: "Explain this like I'm 5 years old. Use a simple analogy and plain language — no jargon."
+
+  - trigger: ";ghost"
+    replace: "Rewrite this in a natural, conversational, human tone. Remove all AI-sounding phrases, hedging, and filler. Sound like a real person."
 
   - trigger: ";sum"
     replace: "Summarize what we've done so far in this session, what's working, what's pending, and what the next step is."
 
   - trigger: ";ctx"
     replace: "Before responding, review the full context of our conversation to make sure your answer is consistent with everything we've discussed."
+
+  - trigger: ";check"
+    replace: "Convert this into an actionable checkbox list. Each item should be a concrete, completable task."
 
   # ── Autonomy ──────────────────────────────────────────────────────────
   - trigger: ";yolo"
@@ -78,3 +180,28 @@ matches:
 
   - trigger: ";cave"
     replace: "Switch to caveman mode: drop all filler, articles, pleasantries. Technical substance only. Fragments OK."
+
+  # ── Utility ───────────────────────────────────────────────────────────
+  - trigger: ";date"
+    replace: "{{date}}"
+    vars:
+      - name: date
+        type: shell
+        params:
+          cmd: "powershell.exe -NoProfile -Command \"Get-Date -Format 'yyyy-MM-dd'\""
+
+  - trigger: ";dt"
+    replace: "{{datetime}}"
+    vars:
+      - name: datetime
+        type: shell
+        params:
+          cmd: "powershell.exe -NoProfile -Command \"Get-Date -Format 'yyyy-MM-dd HH:mm'\""
+
+  - trigger: ";uuid"
+    replace: "{{uuid}}"
+    vars:
+      - name: uuid
+        type: shell
+        params:
+          cmd: "powershell.exe -NoProfile -Command \"[System.Guid]::NewGuid().ToString()\""
